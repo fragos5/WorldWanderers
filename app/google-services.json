@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "128611686367",
+    "firebase_url": "https://world-wonderer-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "world-wonderer",
+    "storage_bucket": "world-wonderer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128611686367:android:6dd55b049593da2a67d66a",
+        "android_client_info": {
+          "package_name": "com.example.worldwanderers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAIqYP3LJSrtzovxiMnAt3af87ntJNj0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
