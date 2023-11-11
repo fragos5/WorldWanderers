@@ -9,6 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.worldwanderers"
+=======
         minSdk 24
 =======
         minSdk 34
