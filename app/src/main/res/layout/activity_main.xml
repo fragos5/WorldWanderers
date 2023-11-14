@@ -5,11 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="ExtraText">
 
 
 
-=======
+
+
+
+
+
     <Button
         android:id="@+id/button"
         android:layout_width="209dp"
@@ -18,7 +23,8 @@
         android:textSize="25dp"
         android:text="write"
         app:layout_constraintBottom_toBottomOf="parent"
-=======
+
+
 
 
     <ImageView
@@ -28,7 +34,7 @@
         android:layout_marginTop="60dp"
         android:transitionName="logo_image"
 
-=======
+
 
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +42,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
-=======
+
+        app:layout_constraintVertical_bias="0.164"
+
+
 
         app:layout_constraintVertical_bias="0.164" />
-=======
+
+
 
         app:srcCompat="@drawable/logo" />
 
