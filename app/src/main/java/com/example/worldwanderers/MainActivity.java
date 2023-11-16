@@ -1,5 +1,7 @@
 package com.example.worldwanderers;
 
+
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -119,5 +122,12 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.child("image").setValue("edw tha mpei eikona");
         databaseReference.child("hastags").setValue("#nofilter");
     }
+
+
+
+
+
+
+
 
 }
