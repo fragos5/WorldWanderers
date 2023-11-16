@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +23,31 @@ public class MainBoard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_board);
+
+        TextView mapTextView = findViewById(R.id.maptext);
+
+        mapTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Replace the mapContainer with the SupportMapFragment
+                SupportMapFragment mapFragment = new SupportMapFragment();
+
+                // Add the OnMapReadyCallback implementation
+                mapFragment.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        // Do operations on the map here if needed
+                    }
+                });
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.mapContainer, mapFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_board);
 
