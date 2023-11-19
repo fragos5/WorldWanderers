@@ -5,29 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="444dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-=======
-        android:layout_marginTop="450dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/backround_blue" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
         android:layout_width="250dp"
         android:layout_height="120dp"
         android:layout_marginTop="40dp"
-
         android:background="@drawable/backround_to_text_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -67,11 +49,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
-
-        <EditText
-
-        <EditText
-
         <TextView
 
 
@@ -92,14 +69,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.1" />
 
-
-
-        <EditText
-
-        <EditText
-
         <TextView
-
             android:id="@+id/comments_text"
             android:layout_width="250dp"
             android:layout_height="80dp"
@@ -116,11 +86,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.9" />
 
-
-        <EditText
-
         <TextView
-
             android:id="@+id/hastags_text"
             android:layout_width="250dp"
             android:layout_height="60dp"
@@ -138,15 +104,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.534" />
 
-
-        <EditText
-
-
-        <EditText
-
         <TextView
-
-
             android:id="@+id/date_text"
             android:layout_width="250dp"
             android:layout_height="30dp"
@@ -216,7 +174,6 @@
             app:layout_constraintVertical_bias="0.898" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -232,19 +189,6 @@
         app:layout_constraintVertical_bias="0.03"
         app:srcCompat="@drawable/baseline_arrow_back_blue_24" />
 
-
-
-    <ImageView
-        android:id="@+id/image_from_gallery"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
 
     <Button
         android:id="@+id/submit_button"
@@ -262,8 +206,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.76" />
 
-
-
+    <ImageView
+        android:id="@+id/image_from_gallery"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        tools:layout_editor_absoluteX="128dp"
+        tools:layout_editor_absoluteY="579dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
