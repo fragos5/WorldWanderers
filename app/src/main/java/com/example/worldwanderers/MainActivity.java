@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -27,7 +28,9 @@ import android.view.View;
 import android.widget.TextView;
 
 
-
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -47,15 +50,6 @@ public class MainActivity extends AppCompatActivity {
     Animation wellcome_animation,backround_animation;
     ImageView image;
 
-
-
-  /* @SuppressLint("MissingInflatedId")
-
-    FirebaseDatabase database;
-    TextView textView;
-    DatabaseReference databaseReference;
-
-    @SuppressLint("MissingInflatedId")*/
 
 
     @Override
@@ -119,5 +113,6 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.child("image").setValue("edw tha mpei eikona");
         databaseReference.child("hastags").setValue("#nofilter");
     }
+
 
 }
