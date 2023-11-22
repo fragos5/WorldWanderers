@@ -27,7 +27,7 @@ public class MainBoard extends AppCompatActivity {
 
         TextView mapTextView = findViewById(R.id.maptext);
 
-        mapTextView.setOnClickListener(new View.OnClickListener() {
+    /*    mapTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Replace the mapContainer with the SupportMapFragment
@@ -47,6 +47,7 @@ public class MainBoard extends AppCompatActivity {
                         .commit();
             }
         });
+*/
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_board);
