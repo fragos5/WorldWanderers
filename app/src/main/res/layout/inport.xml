@@ -207,7 +207,6 @@
         app:layout_constraintVertical_bias="0.76" />
 
     <ImageView
-// Upload_Image
         android:id="@+id/mImageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -218,13 +217,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.979" />
-
-        android:id="@+id/image_from_gallery"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:scaleType="fitXY"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="579dp" />
  
 
 
