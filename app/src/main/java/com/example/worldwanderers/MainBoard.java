@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +23,9 @@ public class MainBoard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_board);
+
+        TextView mapTextView = findViewById(R.id.maptext);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_board);
 
@@ -37,7 +43,6 @@ public class MainBoard extends AppCompatActivity {
             }
         });
 //////////////////////////////////////////////////////////////////////////////////////
-//
 
 // when you press the inport logo or text inport or arrow logo inport from main board you go to setting board
 
@@ -164,20 +169,6 @@ public class MainBoard extends AppCompatActivity {
             }
         });
 /////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
