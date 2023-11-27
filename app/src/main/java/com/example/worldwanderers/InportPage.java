@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
@@ -26,41 +27,34 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-public class InportPage extends AppCompatActivity
-{
+public class InportPage extends AppCompatActivity {
     private static final int PickImageRequest = 1;
     private Uri mImageUri;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private Button submit_button;
-    private  ImageView mImageView;
+    private ImageView mImageView;
 
 
     @SuppressLint("MissingInflatedId")
- 
- @Override
 
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.inport);
 
 
-
-        Button camera_logo=findViewById(R.id.camera_logo);
-        ImageView image_from_gallery=findViewById(R.id.image_from_gallery);
-
+        Button camera_logo = findViewById(R.id.camera_logo);
+        ImageView image_from_gallery = findViewById(R.id.image_from_gallery);
 
 
 // arrow go back to main board
         ImageView arrowBack;
 
-        arrowBack=findViewById(R.id.arrowBack);
+        arrowBack = findViewById(R.id.arrowBack);
 
-        arrowBack.setOnClickListener(new View.OnClickListener()
-        {
+        arrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InportPage.this, MainBoard.class);
@@ -70,19 +64,18 @@ public class InportPage extends AppCompatActivity
         });
 
 
-
-
         // gallery import
 
-        Button blue_gallery_logo=findViewById(R.id.blue_gallery_logo);
+        Button blue_gallery_logo = findViewById(R.id.blue_gallery_logo);
         blue_gallery_logo.setOnClickListener(new View.OnClickListener() {
-   
-     @Override
+
+            @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,1);
-                openFileChooser();}
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 1);
+                openFileChooser();
+            }
 
 
         });
@@ -100,13 +93,12 @@ public class InportPage extends AppCompatActivity
         });
 
 
-
         //camera import
         camera_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent image_from_gallery=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(image_from_gallery,2);
+                Intent image_from_gallery = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(image_from_gallery, 2);
 
             }
         });
@@ -114,13 +106,10 @@ public class InportPage extends AppCompatActivity
     }
 
 
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView image_from_gallery=findViewById(R.id.image_from_gallery);
+        ImageView image_from_gallery = findViewById(R.id.image_from_gallery);
         if (resultCode == RESULT_OK) {
             if (requestCode == 2) {
                 Bitmap img = (Bitmap) (data.getExtras().get("data"));
@@ -136,10 +125,13 @@ public class InportPage extends AppCompatActivity
                 image_from_gallery.setImageURI(selectedImage);
             }
         }
+        mImageUri = data.getData();
+        Toast.makeText(InportPage.this,"mpike edw",Toast.LENGTH_SHORT).show();
+        Picasso.get().load(mImageUri).into(mImageView);
     }
 
 
-    }
+
 
 
     private void openFileChooser(){
@@ -149,14 +141,7 @@ public class InportPage extends AppCompatActivity
         startActivityForResult(intent, PickImageRequest);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        mImageUri = data.getData();
-        Toast.makeText(InportPage.this,"mpike edw",Toast.LENGTH_SHORT).show();
-        Picasso.get().load(mImageUri).into(mImageView);
-    }
 
     private void uploadImg() {
         if (mImageUri != null) {

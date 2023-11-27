@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,7 @@ public class GalleryPage extends AppCompatActivity {
 
         ImageView arrowBack;
 
-        arrowBack=findViewById(R.id.arrowBack);
+        arrowBack = findViewById(R.id.arrowBack);
 
         //buttons sto gallery
         Button button2 = findViewById(R.id.button2);
@@ -33,22 +34,31 @@ public class GalleryPage extends AppCompatActivity {
         Button button10 = findViewById(R.id.button10);
 
 
-        button2.setOnClickListener(new View.OnClickListener()){
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        {
+       /*     button3.setOnClickListener(new View.OnClickListener() {
+        });
             @Override
             public void onClick(View v){
 
             }
+        }*/
+
+            arrowBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(GalleryPage.this, MainBoard.class);
+                    startActivity(intent);
+                }
+
+            });
+
         }
-
-        arrowBack.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GalleryPage.this, MainBoard.class);
-                startActivity(intent);
-            }
-
-        });
     }
 }
 
