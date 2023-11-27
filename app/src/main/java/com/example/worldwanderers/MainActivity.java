@@ -8,21 +8,38 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 
 public class MainActivity extends AppCompatActivity {
 
 
-    FirebaseDatabase database;
-    DatabaseReference databaseReference;
 
 
     //animation
@@ -30,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView image;
 
 
-    TextView textView;
-    @SuppressLint("MissingInflatedId")
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +68,6 @@ public class MainActivity extends AppCompatActivity {
         image=findViewById(R.id.first_backround);
         image.setAnimation(backround_animation);
 
-        //write to database on create
-        //Todo:move this part of the code to a button
-        database=FirebaseDatabase.getInstance();
-        databaseReference=database.getReference("Image 3");
-
-        databaseReference.child("id").setValue("1");
-        databaseReference.child("coordinates").setValue("kati kati");
-        databaseReference.child("image").setValue("edw tha mpei eikona");
-        databaseReference.child("hastags").setValue("#nofilter");
-
-
 
 
         //animation sthn arxh me ton logo
@@ -81,10 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
     }
+
 
 
 
