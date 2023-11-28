@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class InportPage extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     private Button submit_button;
     private ImageView mImageView;
+    private EditText location_text,date_text,tags_text,comments_text;
 
 
     @SuppressLint("MissingInflatedId")
@@ -44,9 +46,14 @@ public class InportPage extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.inport);
 
+        location_text = findViewById(R.id.location_text);
+        date_text = findViewById(R.id.date_text);
+        date_text = findViewById(R.id.date_text);
+        tags_text = findViewById(R.id.tags_text);
+        comments_text = findViewById(R.id.comments_text);
 
         Button camera_logo = findViewById(R.id.camera_logo);
-        ImageView image_from_gallery = findViewById(R.id.image_from_gallery);
+
 
 
 // arrow go back to main board
@@ -72,8 +79,6 @@ public class InportPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 1);
                 openFileChooser();
             }
 
@@ -99,7 +104,6 @@ public class InportPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent image_from_gallery = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(image_from_gallery, 2);
-
             }
         });
 
@@ -109,30 +113,26 @@ public class InportPage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView image_from_gallery = findViewById(R.id.image_from_gallery);
+
         if (resultCode == RESULT_OK) {
             if (requestCode == 2) {
                 Bitmap img = (Bitmap) (data.getExtras().get("data"));
 
                 // Check if img is not null before setting it
                 if (img != null) {
-                    image_from_gallery.setImageBitmap(img);
+                    mImageView.setImageBitmap(img);
                 } else {
                     // Handle the case where the Bitmap is null
                 }
             } else if (requestCode == 1 && data != null) {
-                Uri selectedImage = data.getData();
-                image_from_gallery.setImageURI(selectedImage);
+                mImageUri = data.getData();
+                Picasso.get().load(mImageUri).into(mImageView);
             }
         }
-        mImageUri = data.getData();
-        Toast.makeText(InportPage.this,"mpike edw",Toast.LENGTH_SHORT).show();
-        Picasso.get().load(mImageUri).into(mImageView);
+
+
+
     }
-
-
-
-
 
     private void openFileChooser(){
         Intent intent = new Intent();
@@ -141,22 +141,23 @@ public class InportPage extends AppCompatActivity {
         startActivityForResult(intent, PickImageRequest);
     }
 
-
-
     private void uploadImg() {
         if (mImageUri != null) {
-            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(mImageUri));
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
 
             fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(InportPage.this,"upload successful",Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload("Onoma123",taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+
+                            Upload upload = new Upload(comments_text.getText().toString(),taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(),
+                                    location_text.getText().toString(),
+                                    date_text.getText().toString(),
+                                    tags_text.getText().toString());
+
                             String uploadId = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadId).setValue(upload);
-
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -175,6 +176,7 @@ public class InportPage extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
+
 
 
 
