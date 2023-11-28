@@ -1,15 +1,23 @@
 package com.example.worldwanderers;
 
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class OptionsPage extends AppCompatActivity {
 
+    private Switch mode_switch;
+    private TextView modeStatus;
 
 
     @Override
@@ -31,6 +39,23 @@ public class OptionsPage extends AppCompatActivity {
                 startActivity(intent);
             }
 
+        });
+
+        mode_switch=findViewById(R.id.mode_switch);
+        modeStatus=findViewById(R.id.optionsLogo);
+
+        mode_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+
+
+            }
         });
     }
 }
