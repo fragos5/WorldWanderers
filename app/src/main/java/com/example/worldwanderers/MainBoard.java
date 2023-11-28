@@ -26,28 +26,6 @@ public class MainBoard extends AppCompatActivity {
         setContentView(R.layout.activity_main_board);
 
         TextView mapTextView = findViewById(R.id.maptext);
-
-        mapTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Replace the mapContainer with the SupportMapFragment
-                SupportMapFragment mapFragment = new SupportMapFragment();
-
-                // Add the OnMapReadyCallback implementation
-                mapFragment.getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(GoogleMap googleMap) {
-                        // Do operations on the map here if needed
-                    }
-                });
-
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.mapContainer, mapFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_board);
 
@@ -65,7 +43,6 @@ public class MainBoard extends AppCompatActivity {
             }
         });
 //////////////////////////////////////////////////////////////////////////////////////
-//
 
 // when you press the inport logo or text inport or arrow logo inport from main board you go to setting board
 
@@ -192,20 +169,6 @@ public class MainBoard extends AppCompatActivity {
             }
         });
 /////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

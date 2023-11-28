@@ -22,10 +22,6 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inport);
 
-        locationEditText = findViewById(R.id.location_text);
-        commentsEditText = findViewById(R.id.comments_text);
-        hashtagsEditText = findViewById(R.id.hastags_text);
-        dateEditText = findViewById(R.id.date_text);
         autofillCheckBox = findViewById(R.id.checkBox);
         anotherCheckBox = findViewById(R.id.checkBox3);
         submitButton = findViewById(R.id.submit_button);
