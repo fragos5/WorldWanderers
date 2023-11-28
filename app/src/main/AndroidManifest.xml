@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+
+
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas" />
 
 
 
@@ -26,10 +35,22 @@
         android:value="AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas">
         </meta-data>
         <activity
-            android:name="com.example.worldwanderers.MainBoard"
+            android:name=".MainSettings"
+            android:exported="false" />
+        <activity
+            android:name=".settings"
+            android:exported="false" />
+        <activity
+            android:name=".settingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SETTINGACTIVITY"
+            android:exported="false" />
+        <activity
+            android:name=".MainBoard"
             android:exported="true" />
         <activity
-            android:name="com.example.worldwanderers.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,45 +58,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.worldwanderers.OptionsPage"
+        <activity
+            android:name=".OptionsPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name="com.example.worldwanderers.GalleryPage"
+        <activity
+            android:name=".GalleryPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name="com.example.worldwanderers.MapPage"
+        <activity
+            android:name=".MapPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name="com.example.worldwanderers.InportPage"
+        <activity
+            android:name=".InportPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
 
         <activity android:name=".MapImplementation"
            android:exported="true">
@@ -85,7 +104,6 @@
              <category android:name="android.intent.category.LAUNCHER" />
            </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
