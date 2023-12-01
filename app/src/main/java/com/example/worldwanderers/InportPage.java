@@ -75,20 +75,15 @@ public class InportPage extends AppCompatActivity {
 
         Button blue_gallery_logo = findViewById(R.id.blue_gallery_logo);
         blue_gallery_logo.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 openFileChooser();
             }
-
-
         });
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         mImageView = findViewById(R.id.mImageView);
-
         submit_button = findViewById(R.id.submit_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +91,6 @@ public class InportPage extends AppCompatActivity {
                 uploadImg();
             }
         });
-
-
         //camera import
         camera_logo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,11 +102,9 @@ public class InportPage extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK) {
             if (requestCode == 2) {
                 Bitmap img = (Bitmap) (data.getExtras().get("data"));
@@ -129,9 +120,6 @@ public class InportPage extends AppCompatActivity {
                 Picasso.get().load(mImageUri).into(mImageView);
             }
         }
-
-
-
     }
 
     private void openFileChooser(){
