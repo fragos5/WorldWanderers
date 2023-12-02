@@ -9,23 +9,19 @@ public class Upload {
 
 
     public Upload(String name, String imageUrl, String location,String date, String tag) {
-        if (name.trim().equals("")) {
-            name="No name";
-        }
-        if (location.trim().equals("")){
-            location="No location";
-        }
-        if (location.trim().equals("")){
-            tag="No tag";
-        }
-        if (date.trim().equals("")){
-            date="No date";
-        }
+        if (name.trim().equals("")) {name="No name";}
         this.name = name;
-        this.imageUrl = imageUrl;
+        if (location.trim().equals("")){location="No location";}
         this.location = location;
+        this.imageUrl = imageUrl;
+        if (tag.trim().equals("")){tag="No tag";}
         this.tag = tag;
+        if (date.trim().equals("")){date="No date";}
         this.date = date;
+
+
+
+
     }
 
     public String getName() {

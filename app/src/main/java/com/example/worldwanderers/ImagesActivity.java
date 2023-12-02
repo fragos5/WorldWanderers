@@ -38,22 +38,29 @@ public class ImagesActivity extends AppCompatActivity {
 
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
-
+          ArrayList<String> list = new ArrayList<>();
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                 for(DataSnapshot postSnapshot : snapshot.getChildren() ){
-                    Upload upload = postSnapshot.getValue(Upload.class);
-                    mUploads.add(upload);
-                }
+
+                 for(DataSnapshot postSnapshot : snapshot.getChildren() ) {
+                     String name = postSnapshot.child("name").getValue().toString();
+                     String imageUrl = postSnapshot.child("imageUrl").getValue().toString();
+                     String location = postSnapshot.child("location").getValue().toString();
+                     String date = postSnapshot.child("date").getValue().toString();
+                     String tag = postSnapshot.child("tag").getValue().toString();
+
+                     Upload upload = new Upload(name, imageUrl, location, date, tag);
+                     mUploads.add(upload);
+                 }
+                Toast.makeText(ImagesActivity.this,mUploads.get(1).toString(),Toast.LENGTH_LONG).show();
+
                 mAdapter = new ImageAdapter(ImagesActivity.this,mUploads);
                 mRecyclerView.setAdapter(mAdapter);
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ImagesActivity.this,"de doulepse",Toast.LENGTH_LONG).show();
+                Toast.makeText(ImagesActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
             }
 
 
