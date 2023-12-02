@@ -35,18 +35,6 @@
         android:value="AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas">
         </meta-data>
         <activity
-            android:name=".MainSettings"
-            android:exported="false" />
-        <activity
-            android:name=".settings"
-            android:exported="false" />
-        <activity
-            android:name=".settingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SETTINGACTIVITY"
-            android:exported="false" />
-        <activity
             android:name=".MainBoard"
             android:exported="true" />
         <activity
