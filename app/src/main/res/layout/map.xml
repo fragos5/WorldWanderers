@@ -57,4 +57,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
+    <!-- Button to open the popup window -->
+    <Button
+        android:id="@+id/openPopupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Popup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="@+id/maps"
+        app:layout_constraintTop_toTopOf="@+id/maps"
+        app:layout_constraintVertical_bias="0.03" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
