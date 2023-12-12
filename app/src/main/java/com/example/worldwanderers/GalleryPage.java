@@ -17,9 +17,9 @@ import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GalleryPage extends AppCompatActivity {
-    private EditText location_text;
+
     ListView listView;
-    String[] name = {"Mountains", "Sea", "Friends", "Family", "Sports", "Art"};
+    String[] name = {"Mountains", "Sea", "Friends", "Family", "Sports", "Arts"};
 
     ArrayAdapter<String> arrayAdapter;
 
@@ -30,6 +30,8 @@ public class GalleryPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery);
+
+
         listView = findViewById(R.id.listView);
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,name);
