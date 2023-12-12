@@ -22,13 +22,43 @@ public class GalleryPage extends AppCompatActivity {
     String[] name = {"Mountains", "Sea", "Friends", "Family", "Sports", "Art"};
 
     ArrayAdapter<String> arrayAdapter;
+
+
+
+
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.gallery);
+        listView = findViewById(R.id.listView);
+
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,name);
+        listView.setAdapter(arrayAdapter);
+
+
+        ImageView arrowBack;
+
+        arrowBack = findViewById(R.id.arrowBack);
+
+
+        arrowBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GalleryPage.this, MainBoard.class);
+                startActivity(intent);
+            }
+
+        });
+
+    }
+
     public boolean onCreateOptionMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu,menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView menuItem.getActionView();
-        SearchView.setQueryHint("Type here to search");
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Type here to search");
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
@@ -44,31 +74,10 @@ public class GalleryPage extends AppCompatActivity {
 
             }
         });
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.gallery);
-          ListView = findViewById(R.id.listview);
 
-        arrayAdapter = new ArrayAdapter<String>( context: this, android.R.layout.simple_list_item_1,name);
-        listView.setAdapter(arrayAdapter);
+        return super.onCreateOptionsMenu(menu);
 
 
-        ImageView arrowBack;
 
-        arrowBack = findViewById(R.id.arrowBack);
-
-
-            arrowBack.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(GalleryPage.this, MainBoard.class);
-                    startActivity(intent);
-                }
-
-            });
-
-        }
-    } }
+     }
 }
