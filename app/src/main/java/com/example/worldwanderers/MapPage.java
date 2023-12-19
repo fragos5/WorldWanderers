@@ -146,29 +146,7 @@ public class MapPage extends AppCompatActivity {
         // Show the popup window at the specified absolute position
         popupWindow.showAtLocation(popupView, Gravity.NO_GRAVITY, openButtonX, openButtonY);
 
-        // Add a touch listener to make the popup movable
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            private float offsetX, offsetY;
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Increase the initial touch position offset
-                        offsetX = event.getRawX() - popupWindow.getContentView().getX() * 2;
-                        offsetY = event.getRawY() - popupWindow.getContentView().getY() * 2;
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        // Update the position of the popup window based on touch movement
-                        popupWindow.update(
-                                (int) (event.getRawX() - offsetX),
-                                (int) (event.getRawY() - offsetY),
-                                -1, -1, true);
-                        break;
-                }
-                return true;
-            }
-        });
 
     }
 }

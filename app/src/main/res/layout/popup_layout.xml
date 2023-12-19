@@ -1,22 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@android:drawable/dialog_holo_light_frame">
 
-    <!-- Add your UI elements for the popup window here -->
+    <!-- Title TextView -->
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is a popup window"/>
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Popup Title"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
-    <!-- You can add more UI elements as needed -->
+    <!-- Image View -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="16dp"/>
 
+    <!-- Description TextView -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is a detailed description of the popup window. You can provide more information here."
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Home Icon -->
+        <ImageView
+            android:id="@+id/homeIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_home"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="Home Icon"/>
+
+        <!-- Home Button -->
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:layout_toEndOf="@id/homeIcon"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"/>
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Settings Icon -->
+        <ImageView
+            android:id="@+id/settingsIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_setting"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="Home Icon"/>
+
+        <!-- Settings Button -->
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:layout_toEndOf="@id/settingsIcon"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"/>
+
+        <!-- Add more UI elements as needed -->
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+    <!-- Action Button -->
     <Button
         android:id="@+id/closePopupButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Close Popup"/>
+        android:text="Close Popup"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Additional UI elements can be added as needed -->
+
 </LinearLayout>
