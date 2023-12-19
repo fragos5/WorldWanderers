@@ -140,7 +140,8 @@ public class InportPage extends AppCompatActivity {
                             Toast.makeText(InportPage.this,"upload successful",Toast.LENGTH_LONG).show();
 
                             Upload upload = new Upload(comments_text.getText().toString(),
-                                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(),
+                                    mImageUri.toString(),
+                                //    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(),
                                     location_text.getText().toString(),
                                     date_text.getText().toString(),
                                     tags_text.getText().toString());
