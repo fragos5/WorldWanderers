@@ -1,0 +1,532 @@
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,24 +0,0 @@
+-Index: app/src/main/java/com/example/worldwanderers/InportPage.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.worldwanderers;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.ContentResolver;\r\nimport android.content.Intent;\r\nimport android.graphics.Bitmap;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.provider.MediaStore;\r\nimport android.view.View;\r\nimport android.view.WindowManager;\r\nimport android.webkit.MimeTypeMap;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\nimport com.squareup.picasso.Picasso;\r\n\r\npublic class InportPage extends AppCompatActivity {\r\n    private static final int PickImageRequest = 1;\r\n    private Uri mImageUri;\r\n    private StorageReference mStorageRef;\r\n    private DatabaseReference mDatabaseRef;\r\n    private Button submit_button;\r\n    private ImageView mImageView;\r\n\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);\r\n        setContentView(R.layout.inport);\r\n\r\n\r\n        Button camera_logo = findViewById(R.id.camera_logo);\r\n        ImageView image_from_gallery = findViewById(R.id.image_from_gallery);\r\n\r\n\r\n// arrow go back to main board\r\n        ImageView arrowBack;\r\n\r\n        arrowBack = findViewById(R.id.arrowBack);\r\n\r\n        arrowBack.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(InportPage.this, MainBoard.class);\r\n                startActivity(intent);\r\n            }\r\n\r\n        });\r\n\r\n\r\n        // gallery import\r\n\r\n        Button blue_gallery_logo = findViewById(R.id.blue_gallery_logo);\r\n        blue_gallery_logo.setOnClickListener(new View.OnClickListener() {\r\n\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);\r\n                startActivityForResult(intent, 1);\r\n                openFileChooser();\r\n            }\r\n\r\n\r\n        });\r\n\r\n        mStorageRef = FirebaseStorage.getInstance().getReference(\"uploads\");\r\n        mDatabaseRef = FirebaseDatabase.getInstance().getReference(\"uploads\");\r\n        mImageView = findViewById(R.id.mImageView);\r\n\r\n        submit_button = findViewById(R.id.submit_button);\r\n        submit_button.setOnClickListener(new View.OnClickListener() {\r\n\r\n\r\n            @Override\r\n            public void onClick(View v) {\r\n                uploadImg();\r\n            }\r\n        });\r\n\r\n\r\n        //camera import\r\n        camera_logo.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent image_from_gallery = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);\r\n                startActivityForResult(image_from_gallery, 2);\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        ImageView image_from_gallery = findViewById(R.id.image_from_gallery);\r\n        if (resultCode == RESULT_OK) {\r\n            if (requestCode == 2) {\r\n                Bitmap img = (Bitmap) (data.getExtras().get(\"data\"));\r\n\r\n                // Check if img is not null before setting it\r\n                if (img != null) {\r\n                    image_from_gallery.setImageBitmap(img);\r\n                } else {\r\n                    // Handle the case where the Bitmap is null\r\n                }\r\n            } else if (requestCode == 1 && data != null) {\r\n                Uri selectedImage = data.getData();\r\n                image_from_gallery.setImageURI(selectedImage);\r\n            }\r\n        }\r\n        mImageUri = data.getData();\r\n        Toast.makeText(InportPage.this,\"mpike edw\",Toast.LENGTH_SHORT).show();\r\n        Picasso.get().load(mImageUri).into(mImageView);\r\n    }\r\n\r\n\r\n\r\n\r\n    private void openFileChooser(){\r\n        Intent intent = new Intent();\r\n        intent.setType(\"image/*\");\r\n        intent.setAction(Intent.ACTION_GET_CONTENT);\r\n        startActivityForResult(intent, PickImageRequest);\r\n    }\r\n\r\n\r\n\r\n    private void uploadImg() {\r\n        if (mImageUri != null) {\r\n            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()\r\n                    + \".\" + getFileExtension(mImageUri));\r\n\r\n            fileReference.putFile(mImageUri)\r\n                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n                        @Override\r\n                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n                            Toast.makeText(InportPage.this,\"upload successful\",Toast.LENGTH_LONG).show();\r\n                            Upload upload = new Upload(\"Onoma123\",taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());\r\n                            String uploadId = mDatabaseRef.push().getKey();\r\n                            mDatabaseRef.child(uploadId).setValue(upload);\r\n\r\n                        }\r\n                    }).addOnFailureListener(new OnFailureListener() {\r\n                        @Override\r\n                        public void onFailure(@NonNull Exception e) {\r\n                            Toast.makeText(InportPage.this,\"upload failed\",Toast.LENGTH_SHORT).show();\r\n                        }\r\n                    })\r\n            ;\r\n\r\n        } else {\r\n            Toast.makeText(this,\"None selected\",Toast.LENGTH_SHORT).show();\r\n        }\r\n    }\r\n    private String getFileExtension(Uri uri){\r\n        ContentResolver cR = getContentResolver();\r\n        MimeTypeMap mime = MimeTypeMap.getSingleton();\r\n        return mime.getExtensionFromMimeType(cR.getType(uri));\r\n    }\r\n\r\n\r\n\r\n    private String testing(){\r\n        //asdasd\r\n        return \"gi\";\r\n    }\r\n\r\n\r\n\r\n\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/worldwanderers/InportPage.java b/app/src/main/java/com/example/worldwanderers/InportPage.java
+---- a/app/src/main/java/com/example/worldwanderers/InportPage.java	(revision 14cfd5e1f0822edb1356a163aab97f12865cbbf1)
+-+++ b/app/src/main/java/com/example/worldwanderers/InportPage.java	(date 1701120011901)
+-@@ -179,12 +179,5 @@
+- 
+- 
+- 
+--    private String testing(){
+--        //asdasd
+--        return "gi";
+--    }
+--
+--
+--
+- 
+- }
+-\ No newline at end of file
+Index: app/src/main/java/com/example/worldwanderers/FormActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/example/worldwanderers/FormActivity.java b/app/src/main/java/com/example/worldwanderers/FormActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/worldwanderers/FormActivity.java	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,122 +0,0 @@
+-package com.example.worldwanderers;
+-import android.os.Bundle;
+-import android.text.TextUtils;
+-import android.view.View;
+-import android.widget.Button;
+-import android.widget.CheckBox;
+-import android.widget.CompoundButton;
+-import android.widget.EditText;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import androidx.appcompat.app.AppCompatActivity;
+-
+-public class FormActivity extends AppCompatActivity {
+-
+-    private EditText locationEditText, commentsEditText, hashtagsEditText, dateEditText;
+-    private CheckBox autofillCheckBox, anotherCheckBox;
+-    private Button submitButton;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.inport);
+-
+-        autofillCheckBox = findViewById(R.id.checkBox);
+-        anotherCheckBox = findViewById(R.id.checkBox3);
+-        submitButton = findViewById(R.id.submit_button);
+-
+-        setupListeners();
+-    }
+-
+-    private void setupListeners() {
+-        submitButton.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                submitForm();
+-            }
+-        });
+-
+-        locationEditText.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                if (TextUtils.isEmpty(locationEditText.getText())) {
+-                    // Εάν το location EditText είναι ήδη κενό, μην κάνετε τίποτα
+-                } else {
+-                    // Κάντε ό,τι θέλετε όταν πατηθεί το EditText της τοποθεσίας
+-                }
+-            }
+-        });
+-
+-        commentsEditText.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                   if (TextUtils.isEmpty(commentsEditText.getText())) {
+-                // Εάν το comments EditText είναι ήδη κενό, μην κάνετε τίποτα
+-            } else {
+-                // Κάντε ό,τι θέλετε όταν πατηθεί το EditText των σχολίων
+-            }
+-        }
+-    });
+-
+-        hashtagsEditText.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-
+-                if (TextUtils.isEmpty(commentsEditText.getText())) {
+-                    // Εάν το comments EditText είναι ήδη κενό, μην κάνετε τίποτα
+-                } else {
+-                    // Κάντε ό,τι θέλετε όταν πατηθεί το EditText των σχολίων
+-                }
+-            }
+-        });
+-
+-        dateEditText.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-                if (TextUtils.isEmpty(commentsEditText.getText())) {
+-                    // Εάν το comments EditText είναι ήδη κενό, μην κάνετε τίποτα
+-                } else {
+-                    // Κάντε ό,τι θέλετε όταν πατηθεί το EditText των σχολίων
+-                }
+-
+-            }
+-        });
+-
+-        autofillCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+-            @Override
+-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+-                // Κάντε ό,τι θέλετε όταν αλλάξει η κατάσταση του CheckBox "Autofill"
+-            }
+-        });
+-
+-        anotherCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+-            @Override
+-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+-                // Κάντε ό,τι θέλετε όταν αλλάξει η κατάσταση του άλλου CheckBox
+-            }
+-        });
+-    }
+-
+-    private void submitForm() {
+-        // Εδώ μπορείτε να πάρετε τις τιμές από τα TextViews
+-        String location = locationEditText.getText().toString();
+-        String comments = commentsEditText.getText().toString();
+-        String hashtags = hashtagsEditText.getText().toString();
+-        String date = dateEditText.getText().toString();
+-
+-        // Εδώ μπορείτε να πάρετε την κατάσταση των CheckBoxes
+-        boolean isAutofillChecked = autofillCheckBox.isChecked();
+-        boolean isAnotherCheckBoxChecked = anotherCheckBox.isChecked();
+-
+-        // Εκτελέστε τη λογική που θέλετε με τα δεδομένα
+-        String resultMessage = "Location: " + location +
+-                "\nComments: " + comments +
+-                "\nHashtags: " + hashtags +
+-                "\nDate: " + date +
+-                "\nAutofill Checked: " + isAutofillChecked +
+-                "\nAnother Checkbox Checked: " + isAnotherCheckBoxChecked;
+-
+-        Toast.makeText(FormActivity.this, resultMessage, Toast.LENGTH_LONG).show();
+-    }
+-}
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_π_μ__[Changes]1/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_π_μ__[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_π_μ__[Changes]1/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_π_μ__[Changes]1/shelved.patch	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,19 +0,0 @@
+-Index: app/src/main/res/layout/optionspage.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/optionsLogo\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"SETTINGS\"\r\n        android:textSize=\"40sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        tools:layout_editor_absoluteY=\"32dp\"\r\n        tools:ignore=\"MissingConstraints\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView7\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"450dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/backround_purple\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView5\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"100dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.0\"\r\n        app:srcCompat=\"@drawable/settingslogo_purple\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrowBack\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        android:rotation=\"180\"\r\n        app:layout_constraintHorizontal_bias=\"0.95\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.03\"\r\n        app:srcCompat=\"@drawable/baseline_arrow_back_purple_24\" />\r\n\r\n    <Switch\r\n        android:id=\"@+id/mode_switch\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"DarkMode : \"\r\n        android:textSize=\"20sp\"\r\n        tools:layout_editor_absoluteX=\"12dp\"\r\n        tools:layout_editor_absoluteY=\"124dp\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView5\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"ADOUT : V.1\"\r\n        android:textSize=\"25sp\"\r\n        tools:layout_editor_absoluteX=\"74dp\"\r\n        tools:layout_editor_absoluteY=\"185dp\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView6\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"PRIVACY : ---\"\r\n        android:textSize=\"25sp\"\r\n        tools:layout_editor_absoluteX=\"74dp\"\r\n        tools:layout_editor_absoluteY=\"251dp\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView7\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"POLICY : ---\"\r\n        android:textSize=\"25sp\"\r\n        tools:layout_editor_absoluteX=\"74dp\"\r\n        tools:layout_editor_absoluteY=\"317dp\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView2\"\r\n        android:layout_width=\"33dp\"\r\n        android:layout_height=\"28dp\"\r\n\r\n        android:src=\"@drawable/baseline_keyboard_double_arrow_right_24\"\r\n        tools:layout_editor_absoluteX=\"22dp\"\r\n        tools:layout_editor_absoluteY=\"191dp\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView4\"\r\n        android:layout_width=\"33dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:src=\"@drawable/baseline_keyboard_double_arrow_right_24\"\r\n        tools:layout_editor_absoluteX=\"22dp\"\r\n        tools:layout_editor_absoluteY=\"257dp\"\r\n        />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView6\"\r\n        android:layout_width=\"33dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:src=\"@drawable/baseline_keyboard_double_arrow_right_24\"\r\n        tools:layout_editor_absoluteX=\"22dp\"\r\n        tools:layout_editor_absoluteY=\"323dp\"\r\n        />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/layout/optionspage.xml b/app/src/main/res/layout/optionspage.xml
+---- a/app/src/main/res/layout/optionspage.xml	
+-+++ b/app/src/main/res/layout/optionspage.xml	
+-@@ -4,7 +4,7 @@
+-     xmlns:tools="http://schemas.android.com/tools"
+-     android:layout_width="match_parent"
+-     android:layout_height="match_parent">
+--
+-+  
+-     <TextView
+-         android:id="@+id/optionsLogo"
+-         android:layout_width="wrap_content"
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_____Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_____Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_____Changes_.xml	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_μ_μ__[Changes]" date="1701118232523" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_μ_μ__[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 27/11/2023 10:50 μ.μ. [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_____Changes_1.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_____Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_____Changes_1.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_____Changes_1.xml	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_π_μ__[Changes]1" date="1701479199647" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_05_π_μ__[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2/12/2023 3:05 π.μ. [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_π_μ__[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_π_μ__[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_π_μ__[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_π_μ__[Changes]/shelved.patch	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,39 +0,0 @@
+-Index: app/src/main/AndroidManifest.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n    <uses-permission android:name=\"android.permission.INTERNET\"></uses-permission>\r\n    <uses-permission android:name=\"android.permission.INTERNET\"></uses-permission>\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n\r\n\r\n\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MyApplication\"\r\n        tools:targetApi=\"31\">\r\n\r\n\r\n        <meta-data\r\n        android:name=\"com.google.android.geo.API_KEY\"\r\n        android:value=\"AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas\">\r\n        </meta-data>\r\n        <activity\r\n            android:name=\"com.example.worldwanderers.MainBoard\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\"com.example.worldwanderers.MainActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity android:name=\"com.example.worldwanderers.OptionsPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n\r\n        </activity>\r\n\r\n        <activity android:name=\"com.example.worldwanderers.GalleryPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n\r\n        </activity>\r\n\r\n        <activity android:name=\"com.example.worldwanderers.MapPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n\r\n        </activity>\r\n\r\n        <activity android:name=\"com.example.worldwanderers.InportPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n\r\n        </activity>\r\n\r\n        <activity android:name=\".MapImplementation\"\r\n           android:exported=\"true\">\r\n           <intent-filter>\r\n             <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n             <category android:name=\"android.intent.category.LAUNCHER\" />\r\n           </intent-filter>\r\n        </activity>\r\n\r\n    </application>\r\n\r\n</manifest>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+---- a/app/src/main/AndroidManifest.xml	(revision 9c0f13ecf5504c5c12a4e11e23a52200f33bb49c)
+-+++ b/app/src/main/AndroidManifest.xml	(date 1701479258386)
+-@@ -22,8 +22,8 @@
+- 
+- 
+-         <meta-data
+--        android:name="com.google.android.geo.API_KEY"
+--        android:value="AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas">
+-+            android:name="com.google.android.geo.API_KEY"
+-+            android:value="AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas">
+-         </meta-data>
+-         <activity
+-             android:name="com.example.worldwanderers.MainBoard"
+-@@ -78,12 +78,12 @@
+-         </activity>
+- 
+-         <activity android:name=".MapImplementation"
+--           android:exported="true">
+--           <intent-filter>
+--             <action android:name="android.intent.action.MAIN" />
+-+            android:exported="true">
+-+            <intent-filter>
+-+                <action android:name="android.intent.action.MAIN" />
+- 
+--             <category android:name="android.intent.category.LAUNCHER" />
+--           </intent-filter>
+-+                <category android:name="android.intent.category.LAUNCHER" />
+-+            </intent-filter>
+-         </activity>
+- 
+-     </application>
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_μ_μ__[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_μ_μ__[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_μ_μ__[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_10_50_μ_μ__[Changes]/shelved.patch	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,208 +0,0 @@
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_____Changes_1.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_____Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_____Changes_1.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_____Changes_1.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_μ_μ__[Changes]1" date="1700315205041" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_μ_μ__[Changes]1/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 3:46 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_5_24_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_5_24_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_5_24_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_5_24_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_19_11_2023_5_24_μ_μ__[Changes]" date="1700407460275" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_5_24_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 19/11/2023 5:24 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_26_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_26_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_26_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_26_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_9_26_μ_μ__[Changes]" date="1700335580534" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_26_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 9:26 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_35_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_35_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_35_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_35_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_8_35_μ_μ__[Changes]" date="1700332559022" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_35_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 8:35 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_16_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_16_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_16_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_16_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_19_11_2023_7_16_μ_μ__[Changes]" date="1700414196668" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_16_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 19/11/2023 7:16 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_4_18_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_4_18_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_4_18_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_4_18_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_20_11_2023_4_18_π_μ__[Changes]" date="1700446746415" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_4_18_π_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 20/11/2023 4:18 π.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_56_____Changes_1.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_56_____Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_56_____Changes_1.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_56_____Changes_1.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_8_56_μ_μ__[Changes]1" date="1700333822155" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_56_μ_μ__[Changes]1/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 8:56 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_04_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_04_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_04_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_04_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_9_04_μ_μ__[Changes]" date="1700334291480" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_04_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 9:04 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_41_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_41_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_41_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_41_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_9_41_μ_μ__[Changes]" date="1700336526927" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_41_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 9:41 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_41_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_41_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_41_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_41_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_19_11_2023_7_41_μ_μ__[Changes]" date="1700415714343" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2023_7_41_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 19/11/2023 7:41 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_3_11_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_3_11_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_3_11_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_3_11_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_20_11_2023_3_11_π_μ__[Changes]" date="1700442714333" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_11_2023_3_11_π_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 20/11/2023 3:11 π.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_16_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_16_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_16_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_16_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,9 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_17_11_2023_1_16_π_μ__[Changes]" date="1700176598101" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_16_π_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 17/11/2023 1:16 π.μ. [Changes]" />
+--  <binary>
+--    <option name="BEFORE_PATH" />
+--    <option name="AFTER_PATH" value="WorldWanderersVersion1.zip" />
+--    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_16_π_μ__[Changes]/WorldWanderersVersion1.zip" />
+--  </binary>
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_15_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_15_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_15_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_15_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_9_15_μ_μ__[Changes]" date="1700334952481" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_9_15_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 9:15 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_45_____Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_45_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_45_____Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_45_____Changes_.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_8_45_μ_μ__[Changes]" date="1700333122708" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_8_45_μ_μ__[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 8:45 μ.μ. [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_29_____Changes_1.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_29_____Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_29_____Changes_1.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_29_____Changes_1.xml	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ /dev/null	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-@@ -1,9 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Checkout_at_17_11_2023_1_29_π_μ__[Changes]1" date="1700177447542" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_29_π_μ__[Changes]1/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 17/11/2023 1:29 π.μ. [Changes]" />
+--  <binary>
+--    <option name="BEFORE_PATH" />
+--    <option name="AFTER_PATH" value="WorldWanderersVersion1.zip" />
+--    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_11_2023_1_29_π_μ__[Changes]1/WorldWanderersVersion1.zip" />
+--  </binary>
+--</changelist>
+-\ No newline at end of file
+-Index: build.gradle
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>buildscript {\r\n    dependencies {\r\n        classpath 'com.google.gms:google-services:4.4.0'\r\n    }\r\n}// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nplugins {\r\nid 'com.android.application' version '8.1.2' apply false\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/build.gradle b/build.gradle
+---- a/build.gradle	(revision 9df23f11f4b3caf6d4a9dd69e18fbd7f44e0ce69)
+-+++ b/build.gradle	(date 1701118205061)
+-@@ -4,5 +4,5 @@
+-     }
+- }// Top-level build file where you can add configuration options common to all sub-projects/modules.
+- plugins {
+--id 'com.android.application' version '8.1.2' apply false
+-+id 'com.android.application' version '8.1.3' apply false
+- }
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM__Changes_.xml	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]" date="1701120014291" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 11/27/2023 11:20 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_____Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_____Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_____Changes_.xml	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ /dev/null	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_π_μ__[Changes]" date="1701479949002" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_12_2023_3_18_π_μ__[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2/12/2023 3:18 π.μ. [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: app/src/main/res/layout/inport.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/constraintLayout4\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"120dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:background=\"@drawable/backround_to_text_box\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.5\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <Button\r\n            android:id=\"@+id/camera_logo\"\r\n            android:layout_width=\"90dp\"\r\n            android:layout_height=\"70dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.8\"\r\n            app:layout_constraintStart_toEndOf=\"@+id/blue_gallery_logo\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.4\"\r\n            android:background=\"@drawable/cameralogo\"\r\n            app:srcCompat=\"@drawable/cameralogo\" />\r\n\r\n        <Button\r\n            android:id=\"@+id/blue_gallery_logo\"\r\n            android:layout_width=\"110dp\"\r\n            android:layout_height=\"110dp\"\r\n            android:background=\"@drawable/gallerylogoblue\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:srcCompat=\"@drawable/gallerylogoblue\" />\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/constraintLayout5\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"350dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.503\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/constraintLayout4\">\r\n\r\n        <EditText\r\n\r\n\r\n            android:id=\"@+id/location_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_map_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\" Location\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.1\" />\r\n\r\n\r\n        <EditText\r\n            android:id=\"@+id/tags_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_bookmark_add_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Tags\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.534\" />\r\n\r\n        <EditText\r\n            android:id=\"@+id/date_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_date_range_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Date\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.3\" />\r\n\r\n        <CheckBox\r\n            android:id=\"@+id/checkBox\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:button=\"@drawable/image_text_box\"\r\n            android:fontFamily=\"casual\"\r\n            android:text=\"Autofill\"\r\n            android:textColor=\"#75B8DC\"\r\n            android:textSize=\"12sp\"\r\n            app:layout_constraintBottom_toTopOf=\"@+id/date_text\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/location_text\"\r\n            app:layout_constraintVertical_bias=\"0.5\" />\r\n\r\n        <CheckBox\r\n            android:id=\"@+id/checkBox3\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:button=\"@drawable/image_text_box\"\r\n            android:fontFamily=\"casual\"\r\n            android:text=\"Autofill\"\r\n            android:textColor=\"#75B8DC\"\r\n            android:textSize=\"12sp\"\r\n            app:layout_constraintBottom_toTopOf=\"@+id/tags_text\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/date_text\"\r\n            app:layout_constraintVertical_bias=\"0.5\" />\r\n\r\n\r\n        <EditText\r\n            android:id=\"@+id/comments_text\"\r\n            android:layout_width=\"248dp\"\r\n            android:layout_height=\"83dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_insert_comment_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Comments\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.898\" />\r\n\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrowBack\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        android:rotation=\"180\"\r\n        app:layout_constraintHorizontal_bias=\"0.95\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.03\"\r\n        app:srcCompat=\"@drawable/baseline_arrow_back_blue_24\" />\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/submit_button\"\r\n        android:layout_width=\"146dp\"\r\n        android:layout_height=\"56dp\"\r\n        android:background=\"@drawable/backround_to_text_box\"\r\n        android:fontFamily=\"casual\"\r\n        android:text=\"Submit\"\r\n        android:textColor=\"#75B8DC\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.76\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/mImageView\"\r\n        android:layout_width=\"150dp\"\r\n        android:layout_height=\"150dp\"\r\n        android:scaleType=\"fitXY\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.505\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.979\" />\r\n \r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/inport.xml b/app/src/main/res/layout/inport.xml
+--- a/app/src/main/res/layout/inport.xml	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ b/app/src/main/res/layout/inport.xml	(date 1702416052573)
+@@ -17,7 +17,7 @@
+         app:layout_constraintTop_toTopOf="parent">
+ 
+         <Button
+-            android:id="@+id/camera_logo"
++            android:id="@+id/openCamera"
+             android:layout_width="90dp"
+             android:layout_height="70dp"
+             app:layout_constraintBottom_toBottomOf="parent"
+Index: app/src/main/res/values/ids.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <item name=\"image_from_gallery\" type=\"id\" />\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/ids.xml b/app/src/main/res/values/ids.xml
+--- a/app/src/main/res/values/ids.xml	(revision c54d2e956f7d1b999d0764335682ad0f03ab43be)
++++ b/app/src/main/res/values/ids.xml	(date 1702416052585)
+@@ -1,4 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+     <item name="image_from_gallery" type="id" />
++    <item name="camera_logo" type="id" />
+ </resources>
+\ No newline at end of file

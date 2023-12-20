@@ -1,0 +1,490 @@
+Index: app/src/main/res/layout/inport.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/constraintLayout4\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"120dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:background=\"@drawable/backround_to_text_box\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.5\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <Button\r\n            android:id=\"@+id/camera_logo\"\r\n            android:layout_width=\"90dp\"\r\n            android:layout_height=\"70dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.8\"\r\n            app:layout_constraintStart_toEndOf=\"@+id/blue_gallery_logo\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.4\"\r\n            android:background=\"@drawable/cameralogo\"\r\n            app:srcCompat=\"@drawable/cameralogo\" />\r\n\r\n        <Button\r\n            android:id=\"@+id/blue_gallery_logo\"\r\n            android:layout_width=\"110dp\"\r\n            android:layout_height=\"110dp\"\r\n            android:background=\"@drawable/gallerylogoblue\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:srcCompat=\"@drawable/gallerylogoblue\" />\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/constraintLayout5\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"350dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.503\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/constraintLayout4\">\r\n\r\n        <EditText\r\n\r\n\r\n            android:id=\"@+id/location_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_map_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\" Location\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.1\" />\r\n\r\n\r\n        <EditText\r\n            android:id=\"@+id/tags_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_bookmark_add_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Tags\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.534\" />\r\n\r\n        <EditText\r\n            android:id=\"@+id/date_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_date_range_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Date\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.3\" />\r\n\r\n        <CheckBox\r\n            android:id=\"@+id/checkBox\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:button=\"@drawable/image_text_box\"\r\n            android:fontFamily=\"casual\"\r\n            android:text=\"Autofill\"\r\n            android:textColor=\"#75B8DC\"\r\n            android:textSize=\"12sp\"\r\n            app:layout_constraintBottom_toTopOf=\"@+id/date_text\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/location_text\"\r\n            app:layout_constraintVertical_bias=\"0.5\" />\r\n\r\n        <CheckBox\r\n            android:id=\"@+id/checkBox3\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:button=\"@drawable/image_text_box\"\r\n            android:fontFamily=\"casual\"\r\n            android:text=\"Autofill\"\r\n            android:textColor=\"#75B8DC\"\r\n            android:textSize=\"12sp\"\r\n            app:layout_constraintBottom_toTopOf=\"@+id/tags_text\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/date_text\"\r\n            app:layout_constraintVertical_bias=\"0.5\" />\r\n\r\n\r\n        <EditText\r\n            android:id=\"@+id/comments_text\"\r\n            android:layout_width=\"248dp\"\r\n            android:layout_height=\"83dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_insert_comment_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Comments\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.898\" />\r\n\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrowBack\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        android:rotation=\"180\"\r\n        app:layout_constraintHorizontal_bias=\"0.95\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.03\"\r\n        app:srcCompat=\"@drawable/baseline_arrow_back_blue_24\" />\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/submit_button\"\r\n        android:layout_width=\"146dp\"\r\n        android:layout_height=\"56dp\"\r\n        android:background=\"@drawable/backround_to_text_box\"\r\n        android:fontFamily=\"casual\"\r\n        android:text=\"Submit\"\r\n        android:textColor=\"#75B8DC\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.76\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/mImageView\"\r\n        android:layout_width=\"150dp\"\r\n        android:layout_height=\"150dp\"\r\n        android:scaleType=\"fitXY\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.505\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.979\" />\r\n \r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/inport.xml b/app/src/main/res/layout/inport.xml
+--- a/app/src/main/res/layout/inport.xml	(revision c6cae3ca561c01b4eb5965882b8414173f347f39)
++++ b/app/src/main/res/layout/inport.xml	(date 1703025986330)
+@@ -17,7 +17,7 @@
+         app:layout_constraintTop_toTopOf="parent">
+ 
+         <Button
+-            android:id="@+id/camera_logo"
++            android:id="@+id/openCamera"
+             android:layout_width="90dp"
+             android:layout_height="70dp"
+             app:layout_constraintBottom_toBottomOf="parent"
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\ns\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\"></uses-permission>\r\n    <uses-permission android:name=\"android.permission.INTERNET\"></uses-permission>\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n\r\n\r\n\r\n\r\n    <meta-data\r\n        android:name=\"com.google.android.geo.API_KEY\"\r\n        android:value=\"AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas\" />\r\n\r\n\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MyApplication\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".Music\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Arts\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Sports\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".FriendsFamily\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Sea\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Mountains\"\r\n            android:exported=\"false\" />\r\n\r\n        <meta-data\r\n            android:name=\"com.google.android.geo.API_KEY\"\r\n            android:value=\"AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas\" />\r\n\r\n        <activity\r\n            android:name=\".MainBoard\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".OptionsPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".GalleryPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".MapPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".InportPage\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".MapImplementation\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n\r\n\r\n        <activity android:name=\".MapImplementation\"\r\n           android:exported=\"true\">\r\n           <intent-filter>\r\n             <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n             <category android:name=\"android.intent.category.LAUNCHER\" />\r\n           </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision c6cae3ca561c01b4eb5965882b8414173f347f39)
++++ b/app/src/main/AndroidManifest.xml	(date 1703026436993)
+@@ -2,7 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+ 
+-s
++
+     <uses-permission android:name="android.permission.INTERNET" />
+     <uses-permission android:name="android.permission.INTERNET" />
+ 
+@@ -106,25 +106,7 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-        <activity
+-            android:name=".MapImplementation"
+-            android:exported="true">
+-            <intent-filter>
+-                <action android:name="android.intent.action.MAIN" />
+-
+-
+-                <category android:name="android.intent.category.LAUNCHER" />
+-            </intent-filter>
+-
+ 
+-        <activity android:name=".MapImplementation"
+-           android:exported="true">
+-           <intent-filter>
+-             <action android:name="android.intent.action.MAIN" />
+-
+-             <category android:name="android.intent.category.LAUNCHER" />
+-           </intent-filter>
+-        </activity>
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch
+new file mode 100644
+--- /dev/null	(date 1703026625967)
++++ b/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch	(date 1703026625967)
+@@ -0,0 +1,24 @@
++Index: app/src/main/java/com/example/worldwanderers/InportPage.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.example.worldwanderers;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.ContentResolver;\r\nimport android.content.Intent;\r\nimport android.graphics.Bitmap;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.provider.MediaStore;\r\nimport android.view.View;\r\nimport android.view.WindowManager;\r\nimport android.webkit.MimeTypeMap;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\nimport com.squareup.picasso.Picasso;\r\n\r\npublic class InportPage extends AppCompatActivity {\r\n    private static final int PickImageRequest = 1;\r\n    private Uri mImageUri;\r\n    private StorageReference mStorageRef;\r\n    private DatabaseReference mDatabaseRef;\r\n    private Button submit_button;\r\n    private ImageView mImageView;\r\n\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);\r\n        setContentView(R.layout.inport);\r\n\r\n\r\n        Button camera_logo = findViewById(R.id.camera_logo);\r\n        ImageView image_from_gallery = findViewById(R.id.image_from_gallery);\r\n\r\n\r\n// arrow go back to main board\r\n        ImageView arrowBack;\r\n\r\n        arrowBack = findViewById(R.id.arrowBack);\r\n\r\n        arrowBack.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(InportPage.this, MainBoard.class);\r\n                startActivity(intent);\r\n            }\r\n\r\n        });\r\n\r\n\r\n        // gallery import\r\n\r\n        Button blue_gallery_logo = findViewById(R.id.blue_gallery_logo);\r\n        blue_gallery_logo.setOnClickListener(new View.OnClickListener() {\r\n\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);\r\n                startActivityForResult(intent, 1);\r\n                openFileChooser();\r\n            }\r\n\r\n\r\n        });\r\n\r\n        mStorageRef = FirebaseStorage.getInstance().getReference(\"uploads\");\r\n        mDatabaseRef = FirebaseDatabase.getInstance().getReference(\"uploads\");\r\n        mImageView = findViewById(R.id.mImageView);\r\n\r\n        submit_button = findViewById(R.id.submit_button);\r\n        submit_button.setOnClickListener(new View.OnClickListener() {\r\n\r\n\r\n            @Override\r\n            public void onClick(View v) {\r\n                uploadImg();\r\n            }\r\n        });\r\n\r\n\r\n        //camera import\r\n        camera_logo.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent image_from_gallery = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);\r\n                startActivityForResult(image_from_gallery, 2);\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        ImageView image_from_gallery = findViewById(R.id.image_from_gallery);\r\n        if (resultCode == RESULT_OK) {\r\n            if (requestCode == 2) {\r\n                Bitmap img = (Bitmap) (data.getExtras().get(\"data\"));\r\n\r\n                // Check if img is not null before setting it\r\n                if (img != null) {\r\n                    image_from_gallery.setImageBitmap(img);\r\n                } else {\r\n                    // Handle the case where the Bitmap is null\r\n                }\r\n            } else if (requestCode == 1 && data != null) {\r\n                Uri selectedImage = data.getData();\r\n                image_from_gallery.setImageURI(selectedImage);\r\n            }\r\n        }\r\n        mImageUri = data.getData();\r\n        Toast.makeText(InportPage.this,\"mpike edw\",Toast.LENGTH_SHORT).show();\r\n        Picasso.get().load(mImageUri).into(mImageView);\r\n    }\r\n\r\n\r\n\r\n\r\n    private void openFileChooser(){\r\n        Intent intent = new Intent();\r\n        intent.setType(\"image/*\");\r\n        intent.setAction(Intent.ACTION_GET_CONTENT);\r\n        startActivityForResult(intent, PickImageRequest);\r\n    }\r\n\r\n\r\n\r\n    private void uploadImg() {\r\n        if (mImageUri != null) {\r\n            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()\r\n                    + \".\" + getFileExtension(mImageUri));\r\n\r\n            fileReference.putFile(mImageUri)\r\n                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n                        @Override\r\n                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n                            Toast.makeText(InportPage.this,\"upload successful\",Toast.LENGTH_LONG).show();\r\n                            Upload upload = new Upload(\"Onoma123\",taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());\r\n                            String uploadId = mDatabaseRef.push().getKey();\r\n                            mDatabaseRef.child(uploadId).setValue(upload);\r\n\r\n                        }\r\n                    }).addOnFailureListener(new OnFailureListener() {\r\n                        @Override\r\n                        public void onFailure(@NonNull Exception e) {\r\n                            Toast.makeText(InportPage.this,\"upload failed\",Toast.LENGTH_SHORT).show();\r\n                        }\r\n                    })\r\n            ;\r\n\r\n        } else {\r\n            Toast.makeText(this,\"None selected\",Toast.LENGTH_SHORT).show();\r\n        }\r\n    }\r\n    private String getFileExtension(Uri uri){\r\n        ContentResolver cR = getContentResolver();\r\n        MimeTypeMap mime = MimeTypeMap.getSingleton();\r\n        return mime.getExtensionFromMimeType(cR.getType(uri));\r\n    }\r\n\r\n\r\n\r\n    private String testing(){\r\n        //asdasd\r\n        return \"gi\";\r\n    }\r\n\r\n\r\n\r\n\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/app/src/main/java/com/example/worldwanderers/InportPage.java b/app/src/main/java/com/example/worldwanderers/InportPage.java
++--- a/app/src/main/java/com/example/worldwanderers/InportPage.java	(revision 14cfd5e1f0822edb1356a163aab97f12865cbbf1)
+++++ b/app/src/main/java/com/example/worldwanderers/InportPage.java	(date 1701120011901)
++@@ -179,12 +179,5 @@
++ 
++ 
++ 
++-    private String testing(){
++-        //asdasd
++-        return "gi";
++-    }
++-
++-
++-
++ 
++ }
++\ No newline at end of file
+Index: app/src/main/res/values/ids.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <item name=\"image_from_gallery\" type=\"id\" />\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/ids.xml b/app/src/main/res/values/ids.xml
+--- a/app/src/main/res/values/ids.xml	(revision c6cae3ca561c01b4eb5965882b8414173f347f39)
++++ b/app/src/main/res/values/ids.xml	(date 1703025986317)
+@@ -1,4 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+     <item name="image_from_gallery" type="id" />
++    <item name="camera_logo" type="id" />
+ </resources>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_____Changes_.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_____Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_____Changes_.xml
+new file mode 100644
+--- /dev/null	(date 1703026603945)
++++ b/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_____Changes_.xml	(date 1703026603945)
+@@ -0,0 +1,4 @@
++<changelist name="Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_π_μ__[Changes]" date="1701045650736" recycled="true" deleted="true">
++  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_π_μ__[Changes]/shelved.patch" />
++  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 27/11/2023 2:39 π.μ. [Changes]" />
++</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM__Changes_.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM__Changes_.xml
+new file mode 100644
+--- /dev/null	(date 1703026614559)
++++ b/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM__Changes_.xml	(date 1703026614559)
+@@ -0,0 +1,4 @@
++<changelist name="Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]" date="1701120014291" recycled="true" deleted="true">
++  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_27_2023_11_20_PM_[Changes]/shelved.patch" />
++  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 11/27/2023 11:20 PM [Changes]" />
++</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_π_μ__[Changes]/shelved.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_π_μ__[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_π_μ__[Changes]/shelved.patch
+new file mode 100644
+--- /dev/null	(date 1703026622679)
++++ b/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_11_2023_2_39_π_μ__[Changes]/shelved.patch	(date 1703026622679)
+@@ -0,0 +1,334 @@
++Index: app/src/main/java/com/example/worldwanderers/GalleryPage.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.example.worldwanderers;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.view.WindowManager;\r\nimport android.widget.ImageView;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\npublic class GalleryPage extends AppCompatActivity {\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);\r\n        setContentView(R.layout.gallery);\r\n\r\n        ImageView arrowBack;\r\n\r\n        arrowBack=findViewById(R.id.arrowBack);\r\n\r\n        //buttons sto gallery\r\n        Button button2 = findViewById(R.id.button2);\r\n        Button button3 = findViewById(R.id.button3);\r\n        Button button4 = findViewById(R.id.button4);\r\n        Button button5 = findViewById(R.id.button5);\r\n        Button button6 = findViewById(R.id.button6);\r\n        Button button7 = findViewById(R.id.button7);\r\n        Button button8 = findViewById(R.id.button8);\r\n        Button button9 = findViewById(R.id.button9);\r\n        Button button10 = findViewById(R.id.button10);\r\n\r\n\r\n        button2.setOnClickListener(new View.OnClickListener()){\r\n            @Override\r\n            public void onClick(View v){\r\n\r\n            }\r\n        }\r\n\r\n        arrowBack.setOnClickListener(new View.OnClickListener()\r\n        {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(GalleryPage.this, MainBoard.class);\r\n                startActivity(intent);\r\n            }\r\n\r\n        });\r\n    }\r\n}\r\n\r\n
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/app/src/main/java/com/example/worldwanderers/GalleryPage.java b/app/src/main/java/com/example/worldwanderers/GalleryPage.java
++--- a/app/src/main/java/com/example/worldwanderers/GalleryPage.java	(revision 57d3891256dd1b20a9c1422918bc373a94bdd5a8)
+++++ b/app/src/main/java/com/example/worldwanderers/GalleryPage.java	(date 1701024051461)
++@@ -5,6 +5,7 @@
++ import android.os.Bundle;
++ import android.view.View;
++ import android.view.WindowManager;
+++import android.widget.Button;
++ import android.widget.ImageView;
++ 
++ import androidx.appcompat.app.AppCompatActivity;
++@@ -33,12 +34,19 @@
++         Button button10 = findViewById(R.id.button10);
++ 
++ 
++-        button2.setOnClickListener(new View.OnClickListener()){
+++        button2.setOnClickListener(new View.OnClickListener() {
+++            @Override
+++            public void onClick(View v) {
+++
+++            }
+++        });
+++
+++        button3.setOnClickListener(new View.OnClickListener() {
++             @Override
++-            public void onClick(View v){
+++            public void onClick(View v) {
++ 
++             }
++-        }
+++        });
++ 
++         arrowBack.setOnClickListener(new View.OnClickListener()
++         {
++Index: app/src/main/java/com/example/worldwanderers/MainActivity.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.example.worldwanderers;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.view.WindowManager;\r\nimport android.view.animation.Animation;\r\nimport android.view.animation.AnimationUtils;\r\nimport android.widget.ImageView;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n=======\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.view.WindowManager;\r\nimport android.view.animation.Animation;\r\nimport android.view.animation.AnimationUtils;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.TextView;\r\n\r\n=======\r\n\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n\r\n\r\n=======\r\n    FirebaseDatabase database;\r\n    TextView textView;\r\n    DatabaseReference databaseReference;\r\n=======\r\n\r\n\r\n    //animation\r\n    Animation wellcome_animation,backround_animation;\r\n    ImageView image;\r\n\r\n\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n=======\r\n    FirebaseDatabase database;\r\n    TextView textView;\r\n    DatabaseReference databaseReference;\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        //remove bar on top of the screen\r\n        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        //Animations\r\n        wellcome_animation= AnimationUtils.loadAnimation(this,R.anim.wellcome_animations);\r\n        backround_animation= AnimationUtils.loadAnimation(this,R.anim.backround_animation);\r\n\r\n\r\n        //Hooks\r\n        image=findViewById(R.id.logo);\r\n        image.setAnimation(wellcome_animation);\r\n\r\n        image=findViewById(R.id.first_backround);\r\n        image.setAnimation(backround_animation);\r\n\r\n=======\r\n        // write to database on create\r\n        //Todo:move this part of the code to a button\r\n        database=FirebaseDatabase.getInstance();\r\n        databaseReference=database.getReference(\"Image 1\");\r\n\r\n        databaseReference.child(\"id\").setValue(\"1\");\r\n        databaseReference.child(\"coordinates\").setValue(\"kati kati\");\r\n        databaseReference.child(\"image\").setValue(\"edw tha mpei eikona\");\r\n        databaseReference.child(\"hastags\").setValue(\"#nofilter\");\r\n\r\n\r\n\r\n        //animation sthn arxh me ton logo\r\n        new Handler().postDelayed(new Runnable() {\r\n            @Override\r\n            public void run() {\r\n                Intent intent = new Intent(MainActivity.this,MainBoard.class);\r\n                startActivity(intent);\r\n                finish();\r\n            }\r\n        },2500);\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n    public void writeButton(View view) {\r\n        database = FirebaseDatabase.getInstance();\r\n        databaseReference = database.getReference(\"Image 1\");\r\n\r\n        databaseReference.child(\"id\").setValue(\"1\");\r\n        databaseReference.child(\"coordinates\").setValue(\"kati kati\");\r\n        databaseReference.child(\"image\").setValue(\"edw tha mpei eikona\");\r\n        databaseReference.child(\"hastags\").setValue(\"#nofilter\");\r\n    }\r\n\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/app/src/main/java/com/example/worldwanderers/MainActivity.java b/app/src/main/java/com/example/worldwanderers/MainActivity.java
++--- a/app/src/main/java/com/example/worldwanderers/MainActivity.java	(revision 57d3891256dd1b20a9c1422918bc373a94bdd5a8)
+++++ b/app/src/main/java/com/example/worldwanderers/MainActivity.java	(date 1701023908641)
++@@ -10,7 +10,7 @@
++ import android.widget.ImageView;
++ 
++ import androidx.appcompat.app.AppCompatActivity;
++-=======
+++
++ import android.os.Bundle;
++ import android.os.Handler;
++ import android.view.WindowManager;
++@@ -26,7 +26,7 @@
++ import android.view.View;
++ import android.widget.TextView;
++ 
++-=======
+++
++ 
++ import com.google.firebase.database.DatabaseReference;
++ import com.google.firebase.database.FirebaseDatabase;
++@@ -36,11 +36,11 @@
++ 
++ 
++ 
++-=======
+++
++     FirebaseDatabase database;
++     TextView textView;
++     DatabaseReference databaseReference;
++-=======
+++
++ 
++ 
++     //animation
++@@ -49,11 +49,7 @@
++ 
++ 
++ 
++-    @SuppressLint("MissingInflatedId")
++-=======
++-    FirebaseDatabase database;
++-    TextView textView;
++-    DatabaseReference databaseReference;
+++
++ 
++     @SuppressLint("MissingInflatedId")
++ 
++@@ -77,7 +73,7 @@
++         image=findViewById(R.id.first_backround);
++         image.setAnimation(backround_animation);
++ 
++-=======
+++
++         // write to database on create
++         //Todo:move this part of the code to a button
++         database=FirebaseDatabase.getInstance();
++Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_μ_μ__[Changes]1/shelved.patch
++===================================================================
++diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_μ_μ__[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_μ_μ__[Changes]1/shelved.patch
++deleted file mode 100644
++--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_μ_μ__[Changes]1/shelved.patch	(revision 57d3891256dd1b20a9c1422918bc373a94bdd5a8)
+++++ /dev/null	(revision 57d3891256dd1b20a9c1422918bc373a94bdd5a8)
++@@ -1,190 +0,0 @@
++-Index: app/src/main/res/layout/gallery.xml
++-IDEA additional info:
++-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView3\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Gallery\"\r\n        android:textSize=\"50dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView7\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"450dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/backround_dark_green\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrowBack\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        android:rotation=\"180\"\r\n        app:layout_constraintHorizontal_bias=\"0.95\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.03\"\r\n        app:srcCompat=\"@drawable/baseline_arrow_back_dark_green_24\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
++-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++-<+>UTF-8
++-===================================================================
++-diff --git a/app/src/main/res/layout/gallery.xml b/app/src/main/res/layout/gallery.xml
++---- a/app/src/main/res/layout/gallery.xml	
++-+++ b/app/src/main/res/layout/gallery.xml	
++-@@ -5,6 +5,14 @@
++-     android:layout_width="match_parent"
++-     android:layout_height="match_parent">
++- 
++-+    <Button
++-+        android:id="@+id/button7"
++-+        android:layout_width="61dp"
++-+        android:layout_height="56dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="305dp"
++-+        tools:layout_editor_absoluteY="470dp" />
++-+
++-     <TextView
++-         android:id="@+id/textView3"
++-         android:layout_width="wrap_content"
++-@@ -14,13 +22,14 @@
++-         app:layout_constraintBottom_toBottomOf="parent"
++-         app:layout_constraintEnd_toEndOf="parent"
++-         app:layout_constraintStart_toStartOf="parent"
++--        app:layout_constraintTop_toTopOf="parent" />
++-+        app:layout_constraintTop_toTopOf="parent"
++-+        app:layout_constraintVertical_bias="0.067" />
++- 
++-     <ImageView
++-         android:id="@+id/imageView7"
++-         android:layout_width="wrap_content"
++-         android:layout_height="wrap_content"
++--        android:layout_marginTop="450dp"
++-+        android:layout_marginTop="436dp"
++-         app:layout_constraintEnd_toEndOf="parent"
++-         app:layout_constraintHorizontal_bias="0.0"
++-         app:layout_constraintStart_toStartOf="parent"
++-@@ -40,4 +49,146 @@
++-         app:layout_constraintVertical_bias="0.03"
++-         app:srcCompat="@drawable/baseline_arrow_back_dark_green_24" />
++- 
++-+    <Button
++-+        android:id="@+id/button2"
++-+        android:layout_width="68dp"
++-+        android:layout_height="62dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="42dp"
++-+        tools:layout_editor_absoluteY="376dp" />
++-+
++-+    <Button
++-+        android:id="@+id/button3"
++-+        android:layout_width="67dp"
++-+        android:layout_height="62dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="177dp"
++-+        tools:layout_editor_absoluteY="374dp" />
++-+
++-+    <Button
++-+        android:id="@+id/button4"
++-+        android:layout_width="64dp"
++-+        android:layout_height="58dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="296dp"
++-+        tools:layout_editor_absoluteY="376dp" />
++-+
++-+    <Button
++-+        android:id="@+id/button5"
++-+        android:layout_width="63dp"
++-+        android:layout_height="61dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="42dp"
++-+        tools:layout_editor_absoluteY="470dp" />
++-+
++-+    <Button
++-+        android:id="@+id/button6"
++-+        android:layout_width="62dp"
++-+        android:layout_height="61dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="177dp"
++-+        tools:layout_editor_absoluteY="470dp" />
++-+
++-+    <Button
++-+        android:id="@+id/button8"
++-+        android:layout_width="71dp"
++-+        android:layout_height="61dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="39dp"
++-+        tools:layout_editor_absoluteY="577dp" />
++-+
++-+    <Button
++-+        android:id="@+id/button9"
++-+        android:layout_width="67dp"
++-+        android:layout_height="60dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="172dp"
++-+        tools:layout_editor_absoluteY="578dp" />
++-+
++-+    <Button
++-+        android:id="@+id/button10"
++-+        android:layout_width="62dp"
++-+        android:layout_height="67dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="295dp"
++-+        tools:layout_editor_absoluteY="571dp" />
++-+
++-+    <SearchView
++-+        android:layout_width="327dp"
++-+        android:layout_height="28dp"
++-+        tools:layout_editor_absoluteX="42dp"
++-+        tools:layout_editor_absoluteY="125dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView4"
++-+        android:layout_width="60dp"
++-+        android:layout_height="19dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="45dp"
++-+        tools:layout_editor_absoluteY="438dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView5"
++-+        android:layout_width="63dp"
++-+        android:layout_height="12dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="177dp"
++-+        tools:layout_editor_absoluteY="442dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView6"
++-+        android:layout_width="64dp"
++-+        android:layout_height="14dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="296dp"
++-+        tools:layout_editor_absoluteY="442dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView7"
++-+        android:layout_width="63dp"
++-+        android:layout_height="13dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="42dp"
++-+        tools:layout_editor_absoluteY="540dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView8"
++-+        android:layout_width="63dp"
++-+        android:layout_height="14dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="177dp"
++-+        tools:layout_editor_absoluteY="540dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView9"
++-+        android:layout_width="59dp"
++-+        android:layout_height="16dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="307dp"
++-+        tools:layout_editor_absoluteY="534dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView10"
++-+        android:layout_width="54dp"
++-+        android:layout_height="10dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="49dp"
++-+        tools:layout_editor_absoluteY="642dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView11"
++-+        android:layout_width="64dp"
++-+        android:layout_height="10dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="172dp"
++-+        tools:layout_editor_absoluteY="643dp" />
++-+
++-+    <TextView
++-+        android:id="@+id/textView12"
++-+        android:layout_width="67dp"
++-+        android:layout_height="10dp"
++-+        android:text=""
++-+        tools:layout_editor_absoluteX="295dp"
++-+        tools:layout_editor_absoluteY="645dp" />
++-+
++- </androidx.constraintlayout.widget.ConstraintLayout>
++-\ No newline at end of file
++Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_____Changes_1.xml
++===================================================================
++diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_____Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_____Changes_1.xml
++deleted file mode 100644
++--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_____Changes_1.xml	(revision 57d3891256dd1b20a9c1422918bc373a94bdd5a8)
+++++ /dev/null	(revision 57d3891256dd1b20a9c1422918bc373a94bdd5a8)
++@@ -1,4 +0,0 @@
++-<changelist name="Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_μ_μ__[Changes]1" date="1700315205041" recycled="true" deleted="true">
++-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_11_2023_3_46_μ_μ__[Changes]1/shelved.patch" />
++-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 18/11/2023 3:46 μ.μ. [Changes]" />
++-</changelist>
++\ No newline at end of file
++Index: app/build.gradle
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>plugins {\r\n    id 'com.android.application'\r\n    id 'com.google.gms.google-services'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.example.worldwanderers'\r\n    compileSdk 34\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.worldwanderers\"\r\n=======\r\n        minSdk 24\r\n=======\r\n        minSdk 34\r\n        targetSdk 34\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.6.1'\r\n    implementation 'com.google.android.material:material:1.10.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'com.google.firebase:firebase-database:20.3.0'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.5'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/app/build.gradle b/app/build.gradle
++--- a/app/build.gradle	(revision 57d3891256dd1b20a9c1422918bc373a94bdd5a8)
+++++ b/app/build.gradle	(date 1701023908634)
++@@ -9,9 +9,7 @@
++ 
++     defaultConfig {
++         applicationId "com.example.worldwanderers"
++-=======
++         minSdk 24
++-=======
++         minSdk 34
++         targetSdk 34
++         versionCode 1

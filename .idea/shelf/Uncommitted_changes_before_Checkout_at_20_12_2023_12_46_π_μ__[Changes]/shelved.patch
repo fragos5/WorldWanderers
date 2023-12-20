@@ -1,0 +1,166 @@
+Index: app/src/main/res/values/ids.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <item name=\"image_from_gallery\" type=\"id\" />\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/ids.xml b/app/src/main/res/values/ids.xml
+--- a/app/src/main/res/values/ids.xml	(revision 19434d86f2b1055b3b28d377c5be28047e60ed06)
++++ b/app/src/main/res/values/ids.xml	(date 1703024302812)
+@@ -1,4 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+     <item name="image_from_gallery" type="id" />
++    <item name="camera_logo" type="id" />
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/worldwanderers/FormActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/example/worldwanderers/FormActivity.java b/app/src/main/java/com/example/worldwanderers/FormActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/worldwanderers/FormActivity.java	(revision 19434d86f2b1055b3b28d377c5be28047e60ed06)
++++ /dev/null	(revision 19434d86f2b1055b3b28d377c5be28047e60ed06)
+@@ -1,122 +0,0 @@
+-package com.example.worldwanderers;
+-import android.os.Bundle;
+-import android.text.TextUtils;
+-import android.view.View;
+-import android.widget.Button;
+-import android.widget.CheckBox;
+-import android.widget.CompoundButton;
+-import android.widget.EditText;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import androidx.appcompat.app.AppCompatActivity;
+-
+-public class FormActivity extends AppCompatActivity {
+-
+-    private EditText locationEditText, commentsEditText, hashtagsEditText, dateEditText;
+-    private CheckBox autofillCheckBox, anotherCheckBox;
+-    private Button submitButton;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.inport);
+-
+-        autofillCheckBox = findViewById(R.id.checkBox);
+-        anotherCheckBox = findViewById(R.id.checkBox3);
+-        submitButton = findViewById(R.id.submit_button);
+-
+-        setupListeners();
+-    }
+-
+-    private void setupListeners() {
+-        submitButton.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                submitForm();
+-            }
+-        });
+-
+-        locationEditText.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                if (TextUtils.isEmpty(locationEditText.getText())) {
+-                    // Εάν το location EditText είναι ήδη κενό, μην κάνετε τίποτα
+-                } else {
+-                    // Κάντε ό,τι θέλετε όταν πατηθεί το EditText της τοποθεσίας
+-                }
+-            }
+-        });
+-
+-        commentsEditText.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                   if (TextUtils.isEmpty(commentsEditText.getText())) {
+-                // Εάν το comments EditText είναι ήδη κενό, μην κάνετε τίποτα
+-            } else {
+-                // Κάντε ό,τι θέλετε όταν πατηθεί το EditText των σχολίων
+-            }
+-        }
+-    });
+-
+-        hashtagsEditText.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-
+-                if (TextUtils.isEmpty(commentsEditText.getText())) {
+-                    // Εάν το comments EditText είναι ήδη κενό, μην κάνετε τίποτα
+-                } else {
+-                    // Κάντε ό,τι θέλετε όταν πατηθεί το EditText των σχολίων
+-                }
+-            }
+-        });
+-
+-        dateEditText.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-                if (TextUtils.isEmpty(commentsEditText.getText())) {
+-                    // Εάν το comments EditText είναι ήδη κενό, μην κάνετε τίποτα
+-                } else {
+-                    // Κάντε ό,τι θέλετε όταν πατηθεί το EditText των σχολίων
+-                }
+-
+-            }
+-        });
+-
+-        autofillCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+-            @Override
+-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+-                // Κάντε ό,τι θέλετε όταν αλλάξει η κατάσταση του CheckBox "Autofill"
+-            }
+-        });
+-
+-        anotherCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+-            @Override
+-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+-                // Κάντε ό,τι θέλετε όταν αλλάξει η κατάσταση του άλλου CheckBox
+-            }
+-        });
+-    }
+-
+-    private void submitForm() {
+-        // Εδώ μπορείτε να πάρετε τις τιμές από τα TextViews
+-        String location = locationEditText.getText().toString();
+-        String comments = commentsEditText.getText().toString();
+-        String hashtags = hashtagsEditText.getText().toString();
+-        String date = dateEditText.getText().toString();
+-
+-        // Εδώ μπορείτε να πάρετε την κατάσταση των CheckBoxes
+-        boolean isAutofillChecked = autofillCheckBox.isChecked();
+-        boolean isAnotherCheckBoxChecked = anotherCheckBox.isChecked();
+-
+-        // Εκτελέστε τη λογική που θέλετε με τα δεδομένα
+-        String resultMessage = "Location: " + location +
+-                "\nComments: " + comments +
+-                "\nHashtags: " + hashtags +
+-                "\nDate: " + date +
+-                "\nAutofill Checked: " + isAutofillChecked +
+-                "\nAnother Checkbox Checked: " + isAnotherCheckBoxChecked;
+-
+-        Toast.makeText(FormActivity.this, resultMessage, Toast.LENGTH_LONG).show();
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/res/layout/inport.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/constraintLayout4\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"120dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:background=\"@drawable/backround_to_text_box\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.5\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <Button\r\n            android:id=\"@+id/camera_logo\"\r\n            android:layout_width=\"90dp\"\r\n            android:layout_height=\"70dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.8\"\r\n            app:layout_constraintStart_toEndOf=\"@+id/blue_gallery_logo\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.4\"\r\n            android:background=\"@drawable/cameralogo\"\r\n            app:srcCompat=\"@drawable/cameralogo\" />\r\n\r\n        <Button\r\n            android:id=\"@+id/blue_gallery_logo\"\r\n            android:layout_width=\"110dp\"\r\n            android:layout_height=\"110dp\"\r\n            android:background=\"@drawable/gallerylogoblue\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:srcCompat=\"@drawable/gallerylogoblue\" />\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/constraintLayout5\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"350dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.503\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/constraintLayout4\">\r\n\r\n        <TextView\r\n\r\n\r\n            android:id=\"@+id/location_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_map_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\" Location\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.1\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/comments_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"80dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_insert_comment_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:text=\"Comments\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.9\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/hastags_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_bookmark_add_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Tags\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.534\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/date_text\"\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_date_range_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Date\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.3\" />\r\n\r\n        <CheckBox\r\n            android:id=\"@+id/checkBox\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:button=\"@drawable/image_text_box\"\r\n            android:fontFamily=\"casual\"\r\n            android:text=\"Autofill\"\r\n            android:textColor=\"#75B8DC\"\r\n            android:textSize=\"12sp\"\r\n            app:layout_constraintBottom_toTopOf=\"@+id/date_text\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/location_text\"\r\n            app:layout_constraintVertical_bias=\"0.5\" />\r\n\r\n        <CheckBox\r\n            android:id=\"@+id/checkBox3\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:button=\"@drawable/image_text_box\"\r\n            android:fontFamily=\"casual\"\r\n            android:text=\"Autofill\"\r\n            android:textColor=\"#75B8DC\"\r\n            android:textSize=\"12sp\"\r\n            app:layout_constraintBottom_toTopOf=\"@+id/hastags_text\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/date_text\"\r\n            app:layout_constraintVertical_bias=\"0.5\" />\r\n\r\n\r\n        <EditText\r\n            android:id=\"@+id/editTextText2\"\r\n            android:layout_width=\"248dp\"\r\n            android:layout_height=\"83dp\"\r\n            android:background=\"@drawable/backround_to_text_box\"\r\n            android:drawableLeft=\"@drawable/baseline_insert_comment_24\"\r\n            android:fontFamily=\"casual\"\r\n            android:hint=\"Comments\"\r\n            android:paddingLeft=\"10dp\"\r\n            android:textColorHint=\"#75B8DC\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"1.0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.898\" />\r\n\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrowBack\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        android:rotation=\"180\"\r\n        app:layout_constraintHorizontal_bias=\"0.95\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.03\"\r\n        app:srcCompat=\"@drawable/baseline_arrow_back_blue_24\" />\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/submit_button\"\r\n        android:layout_width=\"146dp\"\r\n        android:layout_height=\"56dp\"\r\n        android:background=\"@drawable/backround_to_text_box\"\r\n        android:fontFamily=\"casual\"\r\n        android:text=\"Submit\"\r\n        android:textColor=\"#75B8DC\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.76\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/mImageView\"\r\n        android:layout_width=\"150dp\"\r\n        android:layout_height=\"150dp\"\r\n        android:scaleType=\"fitXY\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.505\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.979\" />\r\n \r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/inport.xml b/app/src/main/res/layout/inport.xml
+--- a/app/src/main/res/layout/inport.xml	(revision 19434d86f2b1055b3b28d377c5be28047e60ed06)
++++ b/app/src/main/res/layout/inport.xml	(date 1703024302836)
+@@ -17,7 +17,7 @@
+         app:layout_constraintTop_toTopOf="parent">
+ 
+         <Button
+-            android:id="@+id/camera_logo"
++            android:id="@+id/openCamera"
+             android:layout_width="90dp"
+             android:layout_height="70dp"
+             app:layout_constraintBottom_toBottomOf="parent"
