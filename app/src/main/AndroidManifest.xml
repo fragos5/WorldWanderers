@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-s
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,6 +12,7 @@ s
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,12 +21,9 @@ s
 
 
 
-
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas" />
-
-
 
     <application
         android:allowBackup="true"
@@ -35,6 +35,10 @@ s
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ImagesActivity"
+
         <activity
             android:name=".Music"
             android:exported="false" />
@@ -47,6 +51,11 @@ s
         <activity
             android:name=".FriendsFamily"
             android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBhkkdGO_ppEFDjXDThyA_11_kCTOf1Kas"></meta-data>
+
         <activity
             android:name=".Sea"
             android:exported="false" />
@@ -117,13 +126,8 @@ s
             </intent-filter>
 
 
-        <activity android:name=".MapImplementation"
-           android:exported="true">
-           <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-
-             <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
@@ -56,6 +57,15 @@ public class MainBoard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainBoard.this, InportPage.class);
                 startActivity(intent);
+            }
+        });
+
+        Button test_button;
+        test_button=findViewById(R.id.test_button);
+        test_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImagesActivity();
             }
         });
 
@@ -170,8 +180,9 @@ public class MainBoard extends AppCompatActivity {
         });
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
+    }
+    private void openImagesActivity(){
+        Intent intent = new Intent(this,ImagesActivity.class);
+        startActivity(intent);
     }
 }
