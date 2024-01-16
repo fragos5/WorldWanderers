@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="Popup Title"
+        android:text="Menu"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
@@ -115,9 +115,9 @@
         android:id="@+id/closePopupButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Close Popup"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:text="Close Menu"
+        android:textColor="@color/black" />
 
     <!-- Additional UI elements can be added as needed -->
 
